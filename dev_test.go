@@ -9,25 +9,25 @@ import (
 )
 
 func TestInsertSurat(t *testing.T) {
-	no_surat := 96785
+	no_surat := 10234
 	status_surat := model.Status{
-		Id_status:  82,
-		Keterangan: "Terkirim",
+		Id_status:  10,
+		Keterangan: "Tidak Terkirim",
 	}
-	perihal := "surat Pindah"
+	perihal := "surat Dispensasi"
 	id_pos := model.Kodepos{
-		Kode_daerah: 22337,
-		Nama_daerah: "Jawa Tengah",
+		Kode_daerah: 10887,
+		Nama_daerah: "Kalimantan Barat",
 	}
 	pengirim_srt := model.Pengirim{
-		Nama_pengirim: "Dito",
-		Alamat:        "Jawa Tengah",
-		Tgl_kirim:     "21 Januari 2023",
+		Nama_pengirim: "Gino",
+		Alamat:        "Kalimantan Barat",
+		Tgl_kirim:     "6 Januari 2023",
 	}
 	penerima_srt := model.Penerima{
-		Nama_penerima: "Gani",
+		Nama_penerima: "Tian",
 		Alamat:        "Kalimantan Timur",
-		Tgl_terima:    "21 februari 2023",
+		Tgl_terima:    "16 februari 2023",
 	}
 
 	hasil := module.InsertSurat(module.MongoConn, "surat", no_surat, status_surat, perihal, id_pos, pengirim_srt, penerima_srt)
@@ -35,16 +35,16 @@ func TestInsertSurat(t *testing.T) {
 }
 
 func TestInsertDisposisi(t *testing.T) {
-	kode_disposisi := 10314
-	tgl_disposisi := "20 Februari 2021"
+	kode_disposisi := 10814
+	tgl_disposisi := "15 Februari 2021"
 	penerima_surat := model.Penerima{
-		Nama_penerima: "Gani",
+		Nama_penerima: "Tian",
 		Alamat:        "Kalimantan Timur",
-		Tgl_terima:    "21 februari 2023",
+		Tgl_terima:    "16 februari 2023",
 	}
 	stat_disposisi := model.Status{
-		Id_status:  82,
-		Keterangan: "Terkirim",
+		Id_status:  10,
+		Keterangan: "Tidak Terkirim",
 	}
 
 	hasil := module.InsertDisposisi(module.MongoConn, "disposisi", kode_disposisi, tgl_disposisi, penerima_surat, stat_disposisi)
@@ -52,26 +52,26 @@ func TestInsertDisposisi(t *testing.T) {
 }
 
 func TestInsertStatus(t *testing.T) {
-	id_status := 82
-	keterangan := "Terkirim"
+	id_status := 107
+	keterangan := "Tidak Terkirim"
 
 	hasil := module.InsertStatus(module.MongoConn, "status", id_status, keterangan)
 	fmt.Println(hasil)
 }
 
 func TestInsertPengirim(t *testing.T) {
-	nama_pengirim := "Dito"
-	alamat := "Jawa Tengah"
-	tgl_kirim := "21 Januari 2023"
+	nama_pengirim := "Gino"
+	alamat := "Kalimantan Barat"
+	tgl_kirim := "6 Januari 2023"
 
 	hasil := module.InsertPengirim(module.MongoConn, "pengirim", nama_pengirim, alamat, tgl_kirim)
 	fmt.Println(hasil)
 }
 
 func TestInsertPenerima(t *testing.T) {
-	nama_penerima := "Gani"
+	nama_penerima := "Tian"
 	alamat := "Kalimantan Timur"
-	tgl_terima := "21 Februari 2023"
+	tgl_terima := "16 Februari 2023"
 
 	hasil := module.InsertPenerima(module.MongoConn, "penerima", nama_penerima, alamat, tgl_terima)
 	fmt.Println(hasil)
@@ -86,32 +86,32 @@ func TestGetSuratFromNoSurat(t *testing.T) {
 }
 
 func TestGetDisposisiFromKodeDisposisi(t *testing.T) {
-	kode_disposisi := 10244
+	kode_disposisi := 10814
 	disposisi := module.GetDisposisiFromTglDisposisi(kode_disposisi, module.MongoConn, "disposisi")
 	fmt.Println(disposisi)
 }
 
 func TestGetStatusFromIdStatus(t *testing.T) {
-	id_status := 1326
+	id_status := 82
 	status := module.GetStatusFromIdStatus(id_status, module.MongoConn, "status")
 	fmt.Println(status)
 }
 func TestGetPengirimFromNamaPengirim(t *testing.T) {
-	nama_pengirim := "Ucok"
-	pengirim := module.GetPengirimFromNamaPengirim(nama_pengirim, module.MongoConn, "nama_pengirim")
+	nama_pengirim := "Gisa"
+	pengirim := module.GetPengirimFromNamaPengirim(nama_pengirim, module.MongoConn, "pengirim")
 	fmt.Println(pengirim)
 }
 
 func TestGetPenerimaFromNamaPenerima(t *testing.T) {
-	nama_penerima := "Dani"
-	penerima := module.GetPenerimaFromNamaPenerima(nama_penerima, module.MongoConn, "nama_penerima")
+	nama_penerima := "Tian"
+	penerima := module.GetPenerimaFromNamaPenerima(nama_penerima, module.MongoConn, "penerima")
 	fmt.Println(penerima)
 }
 
 //test getFunctionAll
 
 func TestGetAllSurat(t *testing.T) {
-	data := module.GetAllSurat(module.MongoConn, "Surat")
+	data := module.GetAllSurat(module.MongoConn, "surat")
 	fmt.Println(data)
 }
 func TestGetAllDisposisi(t *testing.T) {
@@ -119,7 +119,7 @@ func TestGetAllDisposisi(t *testing.T) {
 	fmt.Println(data)
 }
 func TestGetAllStatus(t *testing.T) {
-	data := module.GetAllStatus(module.MongoConn, "Status")
+	data := module.GetAllStatus(module.MongoConn, "status")
 	fmt.Println(data)
 }
 func TestGetAllPengirim(t *testing.T) {

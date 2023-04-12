@@ -100,7 +100,7 @@ func GetDisposisiFromTglDisposisi(tgl_disposisi int, db *mongo.Database, col str
 	return sm
 }
 
-func GetStatusFromIdStatus(id_status int, db *mongo.Database, col string) (sm model.Disposisi) {
+func GetStatusFromIdStatus(id_status int, db *mongo.Database, col string) (sm model.Status) {
 	status := db.Collection(col)
 	filter := bson.M{"id_status": id_status}
 	err := status.FindOne(context.TODO(), filter).Decode(&sm)
@@ -112,7 +112,7 @@ func GetStatusFromIdStatus(id_status int, db *mongo.Database, col string) (sm mo
 
 func GetPengirimFromNamaPengirim(nama_pengirim string, db *mongo.Database, col string) (sm model.Pengirim) {
 	pengirim := db.Collection(col)
-	filter := bson.M{"nama_penerima": nama_pengirim}
+	filter := bson.M{"nama_pengirim": nama_pengirim}
 	err := pengirim.FindOne(context.TODO(), filter).Decode(&sm)
 	if err != nil {
 		fmt.Printf("getPenerimaFromNamaPengirim: %v\n", err)
