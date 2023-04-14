@@ -9,25 +9,25 @@ import (
 )
 
 func TestInsertSurat(t *testing.T) {
-	no_surat := 10234
+	no_surat := 20134
 	status_surat := model.Status{
-		Id_status:  10,
-		Keterangan: "Tidak Terkirim",
+		Id_status:  56,
+		Keterangan: "Terkirim",
 	}
-	perihal := "surat Dispensasi"
+	perihal := "surat Diplomatik"
 	id_pos := model.Kodepos{
-		Kode_daerah: 10887,
-		Nama_daerah: "Kalimantan Barat",
+		Kode_daerah: 80234,
+		Nama_daerah: "Sulawesi Barat",
 	}
 	pengirim_srt := model.Pengirim{
-		Nama_pengirim: "Gino",
-		Alamat:        "Kalimantan Barat",
-		Tgl_kirim:     "6 Januari 2023",
+		Nama_pengirim: "Rizal",
+		Alamat:        "Sulawesi Barat",
+		Tgl_kirim:     "6 Maret 2020",
 	}
 	penerima_srt := model.Penerima{
-		Nama_penerima: "Tian",
-		Alamat:        "Kalimantan Timur",
-		Tgl_terima:    "16 februari 2023",
+		Nama_penerima: "Ozil",
+		Alamat:        "Sulawesi Tenggara",
+		Tgl_terima:    "16 Maret 2020",
 	}
 
 	hasil := module.InsertSurat(module.MongoConn, "surat", no_surat, status_surat, perihal, id_pos, pengirim_srt, penerima_srt)
@@ -35,16 +35,16 @@ func TestInsertSurat(t *testing.T) {
 }
 
 func TestInsertDisposisi(t *testing.T) {
-	kode_disposisi := 10814
-	tgl_disposisi := "15 Februari 2021"
+	kode_disposisi := 20156
+	tgl_disposisi := "15 Februari 2020"
 	penerima_surat := model.Penerima{
-		Nama_penerima: "Tian",
-		Alamat:        "Kalimantan Timur",
-		Tgl_terima:    "16 februari 2023",
+		Nama_penerima: "Ozil",
+		Alamat:        "Sulawesi Tenggara",
+		Tgl_terima:    "16 februari 2020",
 	}
 	stat_disposisi := model.Status{
-		Id_status:  10,
-		Keterangan: "Tidak Terkirim",
+		Id_status:  56,
+		Keterangan: "Terkirim",
 	}
 
 	hasil := module.InsertDisposisi(module.MongoConn, "disposisi", kode_disposisi, tgl_disposisi, penerima_surat, stat_disposisi)
@@ -52,26 +52,26 @@ func TestInsertDisposisi(t *testing.T) {
 }
 
 func TestInsertStatus(t *testing.T) {
-	id_status := 107
-	keterangan := "Tidak Terkirim"
+	id_status := 56
+	keterangan := "Terkirim"
 
 	hasil := module.InsertStatus(module.MongoConn, "status", id_status, keterangan)
 	fmt.Println(hasil)
 }
 
 func TestInsertPengirim(t *testing.T) {
-	nama_pengirim := "Gino"
-	alamat := "Kalimantan Barat"
-	tgl_kirim := "6 Januari 2023"
+	nama_pengirim := "Rizal"
+	alamat := "Sulawesi Barat"
+	tgl_kirim := "6 Januari 2020"
 
 	hasil := module.InsertPengirim(module.MongoConn, "pengirim", nama_pengirim, alamat, tgl_kirim)
 	fmt.Println(hasil)
 }
 
 func TestInsertPenerima(t *testing.T) {
-	nama_penerima := "Tian"
-	alamat := "Kalimantan Timur"
-	tgl_terima := "16 Februari 2023"
+	nama_penerima := "Ozil"
+	alamat := "Sulawesi Tenggara"
+	tgl_terima := "16 Februari 202-"
 
 	hasil := module.InsertPenerima(module.MongoConn, "penerima", nama_penerima, alamat, tgl_terima)
 	fmt.Println(hasil)
@@ -80,30 +80,30 @@ func TestInsertPenerima(t *testing.T) {
 // test getFunction
 
 func TestGetSuratFromNoSurat(t *testing.T) {
-	NoSurat := 12143113
+	NoSurat := 20134
 	surat := module.GetSuratFromNoSurat(NoSurat, module.MongoConn, "surat")
 	fmt.Println(surat)
 }
 
 func TestGetDisposisiFromKodeDisposisi(t *testing.T) {
-	kode_disposisi := 10814
+	kode_disposisi := 20156
 	disposisi := module.GetDisposisiFromTglDisposisi(kode_disposisi, module.MongoConn, "disposisi")
 	fmt.Println(disposisi)
 }
 
 func TestGetStatusFromIdStatus(t *testing.T) {
-	id_status := 82
+	id_status := 56
 	status := module.GetStatusFromIdStatus(id_status, module.MongoConn, "status")
 	fmt.Println(status)
 }
 func TestGetPengirimFromNamaPengirim(t *testing.T) {
-	nama_pengirim := "Gisa"
+	nama_pengirim := "Rizal"
 	pengirim := module.GetPengirimFromNamaPengirim(nama_pengirim, module.MongoConn, "pengirim")
 	fmt.Println(pengirim)
 }
 
 func TestGetPenerimaFromNamaPenerima(t *testing.T) {
-	nama_penerima := "Tian"
+	nama_penerima := "Ozil"
 	penerima := module.GetPenerimaFromNamaPenerima(nama_penerima, module.MongoConn, "penerima")
 	fmt.Println(penerima)
 }
